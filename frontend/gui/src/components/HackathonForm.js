@@ -4,25 +4,30 @@ import { Form, Input, Button, InputNumber, Select, DatePicker, Upload } from 'an
 import axios from 'axios';
 import { PlusOutlined } from '@ant-design/icons';
 
+const normFile = (e) => {
+    console.log('Upload event:', e);
+    if (Array.isArray(e)) {
+        return e;
+    }
+    return e?.fileList;
+};
+
 
 const HackathonForm = (props) => {
     const [form] = Form.useForm();
-
-    const normFile = (e) => {
-        console.log('Upload event:', e);
-        if (Array.isArray(e)) {
-            return e;
-        }
-        return e?.fileList;
-    };
 
     const handleFormSubmit = (event, requestType, hackathonID) => {
         event.preventDefault();
         const title = event.target.elements.title.value;
         const description = event.target.elements.description.value;
         const background_image = event.target.elements.background_image.files[0];
-        console.log(background_image)
+        console.log(background_image.name)
+        const formData = new FormData()
+        formData.append('image', background_image.name)
+        console.log(formData)
         const hackathon_image = event.target.elements.hackathon_image.value;
+        console.log(hackathon_image)
+
         const submission_type = event.target.elements.submission_type.value;
         const start_datetime = event.target.elements.start_datetime.value;
         const end_datetime = event.target.elements.end_datetime.value;
@@ -75,7 +80,7 @@ const HackathonForm = (props) => {
             <Form.Item label="Description" name="description">
                 <Input  placeholder="Enter some description..." />
             </Form.Item>
-            <Form.Item label="Upload Background Image" name="background_image" valuePropName="fileList" getValueFromEvent={normFile}>
+            <Form.Item label="Upload Background Image" name="background_image">
                 <Input type="file" placeholder="Upload Image" />
             </Form.Item>
             <Form.Item

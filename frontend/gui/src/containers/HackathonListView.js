@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Hackathons from '../components/Hackathon'
 import axios from 'axios'
-import HackathonForm from '../components/HackathonForm'
+import HackathonForm2 from '../components/HackathonForm2'
 
 const HackathonListView = () => {
 
@@ -18,7 +18,7 @@ const HackathonListView = () => {
       <Hackathons data={hackathon} />
       <br></br>
       <h2>Create a hackathon</h2>
-      <HackathonForm requestType="post" articleID={null} btnText="Post" />
+      <HackathonForm2 requestType="post" articleID={null} btnText="Post" />
     </div>
   )
 }
